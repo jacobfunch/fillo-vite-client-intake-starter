@@ -218,7 +218,7 @@ h1 {
   line-height: 1.45;
 }
 
-footer {
+.app-shell > footer {
   border-top: 1px solid #e1e0dd;
   padding-top: 1rem;
   color: #8a8781;
@@ -240,7 +240,7 @@ footer {
 
 @media (max-width: 36rem) {
   .site-header > p,
-  footer {
+  .app-shell > footer {
     display: none;
   }
 

@@ -1,63 +1,70 @@
 # AGENTS.md
 
-This is a deliberately small Vite + React starter for a client intake form with
-browser-direct file uploads. Keep it understandable in one sitting.
+This repository contains a small Vite and React client intake form. Keep the
+example small enough to understand in one sitting.
 
-## Goal
+## Purpose
 
-The host application owns the client-facing route, layout, styling, account
-authorization, and after-submit behavior. Fillo owns the form schema, validation,
-upload lifecycle, accepted response, versions, exports, and delivery workflow.
+The app controls the route, access, layout, styles and success state. Fillo
+controls the form schema, validation, uploads, responses, versions, exports and
+delivery.
 
-## Start here
+## Start
 
-1. Read `README.md` and inspect `src/IntakeForm.tsx`.
-2. Run `npm install`, `npm run build`, and then `npm run dev`.
-3. Without a key, verify that the page renders the labeled non-submitting preview.
-4. For a Fillo task, run `npx @usefillo/cli@latest skill install` and use the
-   installed `build-with-fillo` skill.
+1. Read `README.md`.
+2. Read `src/IntakeForm.tsx`.
+3. Run `npm install`.
+4. Run `npm run build`.
+5. Run `npm run dev`.
+6. Remove the Fillo key and check Preview mode.
+7. For Fillo work, run `npx @usefillo/cli@latest skill install`.
+8. Follow the installed `build-with-fillo` skill.
 
-## Repository map
+## Files
 
-- `src/IntakeForm.tsx`: code-defined schema and preview/connected states.
-- `src/main.tsx`: client-facing page and workflow context.
-- `src/styles.css`: host UI and scoped renderer styling.
-- `index.html`: browser metadata and application entry point.
+- `src/IntakeForm.tsx`: form schema and connected or preview state.
+- `src/main.tsx`: page layout and instructions for the client.
+- `src/styles.css`: page styles and Fillo form styles.
+- `index.html`: page metadata and the Vite entry point.
 
-## Stable contract
+## IDs to keep
 
 - Form ID: `vite-client-intake`
 - Field IDs: `name`, `email`, `outcome`, `target-date`, `documents`
 
-Once real responses exist, preserve those IDs. Labels and helper copy may change
-without changing stored answer keys.
+Keep these IDs after the first response. Fillo uses the field IDs as stored
+answer keys. You can change labels and help text.
 
-## Guardrails
+## Rules
 
-- Keep the form inside the client flow; do not replace it with an iframe or a
-  separate upload portal.
-- Keep the preview fallback. A clone should show the form without accepting a
-  response or uploading a file.
-- Before changing file fields, verify `canPublishFileFields` with Fillo bootstrap,
-  `npx @usefillo/cli@latest whoami --json`, or
-  `npx @usefillo/cli@latest storage status --json` as appropriate.
-- Do not drop the upload field merely because storage needs a human connection step.
-- Never put an `fsk_` key, storage credential, identity secret, webhook secret,
-  login token, or provider URL in browser code or committed files.
-- Do not add a second upload API. Fillo opens scoped sessions, the browser sends
-  bytes to the active provider, and the server accepts the completed reference.
-- Keep field conditions in the schema. Do not change schema shape per visitor.
-- Preserve accessible labels, errors, focus behavior, disabled states, and keyboard use.
-- Do not add analytics, a state library, or unrelated portal features to this starter.
+- Keep the form in the client page. Do not replace it with an iframe or another
+  upload page.
+- Keep Preview mode. It must show the form without sending answers or files.
+- Check `canPublishFileFields` before you add or change a file field. Use Fillo
+  bootstrap, `npx @usefillo/cli@latest whoami --json`, or
+  `npx @usefillo/cli@latest storage status --json`.
+- Do not remove the file field because storage needs a person to connect it.
+- Do not put an `fsk_` key, storage credential, identity secret, webhook secret,
+  login token or provider URL in browser code or committed files.
+- Do not add another upload API. Fillo creates an upload session. The browser
+  sends the file to the storage provider. Fillo records the completed file
+  reference.
+- Put field conditions in the form schema. Do not change the schema for each
+  visitor.
+- Keep labels, errors, focus, disabled states and keyboard controls accessible.
+- Do not add analytics, a state library or unrelated portal features.
 
-## Verification
+## Checks
 
 - `npm run build` passes.
-- The no-key page shows `Preview mode`, visible form fields, and a disabled upload preview.
-- Desktop and mobile layouts do not overflow.
-- With a configured key, the form stages or resolves according to workspace sync policy.
-- Durable storage is connected before a production upload test.
-- One safe test response and its file reference appear in the Fillo response workspace.
+- Preview mode shows the fields and a disabled file field.
+- Preview mode does not send a response.
+- The desktop and mobile pages do not overflow.
+- With a key, Fillo stages or loads the form according to the workspace sync
+  setting.
+- Connect your own storage before a production upload test.
+- Submit one test response. Find its file reference in Fillo.
 
-When handing work back, state the build result and the exact remaining dashboard
-action: connect storage, publish, or verify a response. Never report private workspace URLs.
+When you finish, report the build result. State the next action in Fillo:
+connect storage, publish the form or check the response. Do not report private
+workspace URLs.

@@ -22,11 +22,10 @@ createRoot(root).render(
 
       <div className="intake-layout">
         <section className="intro" aria-labelledby="intake-title">
-          <p className="eyebrow">Before we meet</p>
-          <h1 id="intake-title">Prepare the first working session.</h1>
+          <p className="eyebrow">New project</p>
+          <h1 id="intake-title">Tell us about your project.</h1>
           <p className="intro-copy">
-            Share the outcome, timing, and useful reference files. We&rsquo;ll read everything
-            before the call.
+            Tell us what you need, when you need it and which files will help us prepare.
           </p>
 
           <section className="next-steps" aria-labelledby="next-steps-title">
@@ -34,15 +33,15 @@ createRoot(root).render(
             <ol>
               <li>
                 <span>1</span>
-                We review the brief and files.
+                We read your brief and files.
               </li>
               <li>
                 <span>2</span>
-                You receive a focused agenda.
+                We send you a plan for the call.
               </li>
               <li>
                 <span>3</span>
-                We use the call for decisions, not admin.
+                We use the call to make decisions.
               </li>
             </ol>
           </section>
@@ -51,7 +50,7 @@ createRoot(root).render(
         <IntakeForm />
       </div>
 
-      <footer>Native intake form · Responses and files stay together in Fillo</footer>
+      <footer>Built with Fillo · Answers and file references appear in one response</footer>
     </main>
   </StrictMode>,
 );

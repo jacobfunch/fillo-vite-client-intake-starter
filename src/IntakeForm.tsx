@@ -3,7 +3,7 @@ import { createClient, defineForm, FilloForm } from "@usefillo/react";
 const intake = defineForm({
   id: "vite-client-intake",
   title: "Tell us about your project",
-  description: "Share the context we need before the first working session.",
+  description: "Tell us what you need, when you need it and which files will help us prepare.",
   pages: [
     {
       id: "intake",
@@ -13,14 +13,14 @@ const intake = defineForm({
         {
           id: "outcome",
           kind: "long_text",
-          label: "What should be different when this work is done?",
+          label: "What result do you need?",
           required: true,
         },
         { id: "target-date", kind: "date", label: "Target date" },
         {
           id: "documents",
           kind: "file_upload",
-          label: "Briefs or reference files (PDF, DOCX, PNG, or JPG)",
+          label: "Briefs or reference files (PDF, DOCX, PNG or JPG)",
           accept: [".pdf", ".doc", ".docx", ".png", ".jpg", ".jpeg"],
           maxFiles: 5,
         },
@@ -38,18 +38,18 @@ export function IntakeForm() {
     <section className="form-card" aria-label="Client intake">
       <div className="form-heading">
         <div>
-          <p className="form-kicker">Project brief</p>
-          <h2>Tell us what the work needs.</h2>
+          <p className="form-kicker">Project details</p>
+          <h2>What do you need?</h2>
         </div>
-        <span>About 4 minutes</span>
+        <span>Takes about 4 minutes</span>
       </div>
 
       {!fillo ? (
         <aside className="setup" role="status">
           <strong>Preview mode</strong>
           <span>
-            Add <code>VITE_FILLO_KEY</code> to sync this form, enable uploads, and collect a
-            response.
+            Add <code>VITE_FILLO_KEY</code> to connect this form to Fillo. You can then upload files
+            and collect responses.
           </span>
         </aside>
       ) : null}
@@ -64,8 +64,10 @@ export function IntakeForm() {
           renderSuccess={() => (
             <div className="preview-success">
               <span aria-hidden="true">✓</span>
-              <h3>Preview complete.</h3>
-              <p>Nothing was sent or saved. Add a publishable key to collect a real response.</p>
+              <h3>Preview finished</h3>
+              <p>
+                We did not send or save your answers. Add a publishable key to collect responses.
+              </p>
             </div>
           )}
         />
@@ -73,8 +75,8 @@ export function IntakeForm() {
 
       <p className="form-footnote">
         {fillo
-          ? "Your answers and file references arrive together in one response."
-          : "Preview only. Anything you enter stays in this browser tab."}
+          ? "Your answers and file references appear together in Fillo."
+          : "Preview only. We do not send or save what you enter."}
       </p>
     </section>
   );

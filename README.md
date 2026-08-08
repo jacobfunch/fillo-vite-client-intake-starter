@@ -1,130 +1,123 @@
-# Client intake with file uploads for Vite + React
+# Client intake form with file uploads for Vite and React
 
 [![CI](https://github.com/jacobfunch/fillo-vite-client-intake-starter/actions/workflows/ci.yml/badge.svg)](https://github.com/jacobfunch/fillo-vite-client-intake-starter/actions/workflows/ci.yml)
 
-A focused intake flow that keeps the contact, project outcome, target date, and
-reference files in one response. The UI renders natively with `@usefillo/react`;
-files go browser-direct to the workspace's configured storage.
+Use this starter to collect a client's contact details, project brief and files
+in one response. `@usefillo/react` renders the form in the page. The browser
+sends files straight to the storage connected to Fillo.
 
-[Read the implementation guide](https://fillo.so/guides/client-intake-form-with-file-uploads) ·
-[Open the no-signup demo](https://jacobfunch.github.io/fillo-vite-client-intake-starter/) ·
+[Open the demo](https://jacobfunch.github.io/fillo-vite-client-intake-starter/) ·
+[Read the setup guide](https://fillo.so/guides/client-intake-form-with-file-uploads) ·
 [React SDK](https://www.npmjs.com/package/@usefillo/react) ·
-[Fillo upload docs](https://fillo.so/docs/uploads)
+[File upload docs](https://fillo.so/docs/uploads)
 
-![Client intake page with project context and a native Fillo form](docs/preview-desktop.png)
+![Client intake page with a Fillo form](docs/preview-desktop.png)
 
 <details>
 <summary>View the mobile layout</summary>
 <br />
-<img src="docs/preview-mobile.png" alt="The same intake flow on a mobile viewport" width="390" />
+<img src="docs/preview-mobile.png" alt="Client intake form on a mobile screen" width="390" />
 </details>
 
-## What this starter proves
-
-- A typed schema can render as native React controls inside a client-facing page.
-- Answers and completed file references remain attached to one accepted response.
-- The upload bytes travel browser-direct instead of passing through this Vite app.
-- A missing key opens a safe, non-submitting preview so the clone is useful immediately.
-- Storage, workspace, identity, and webhook credentials stay outside the browser bundle.
-
-The repository stays intentionally compact: one schema component, one entry point,
-and one stylesheet.
-
-## See the UI first
+## Run the preview
 
 ```bash
 npm install
 npm run dev
 ```
 
-Open [http://localhost:5173](http://localhost:5173). No Fillo account is required
-for the local UI preview. The page labels itself **Preview mode**, keeps the
-fields and local success interaction inspectable, disables uploads, and never
-sends a response or makes remote form changes.
+Open [http://localhost:5173](http://localhost:5173). You do not need a Fillo
+account. Without a key, the page shows **Preview mode**. You can fill in the
+form and see the success message. The preview does not upload files, send
+answers or change a form in Fillo.
 
-## Collect the first real intake
+## What you get
+
+- A form schema in `src/IntakeForm.tsx`.
+- React form controls that you can style with normal CSS. There is no iframe.
+- A file field that sends files straight from the browser to connected storage.
+- A local preview that works before you add a key.
+- Build checks for pull requests and a GitHub Pages preview.
+
+## Connect the form to Fillo
 
 1. [Create or open a Fillo workspace](https://fillo.so/start?from=github-vite-client-intake).
-2. Connect durable storage: Google Drive, Box, Amazon S3, or an S3-compatible
-   bucket such as Cloudflare R2.
-3. Copy `.env.example` to `.env.local` and set `VITE_FILLO_KEY` to the public
-   workspace `pk_` key.
-4. Add `http://localhost:5173` to the workspace's allowed origins.
-5. Restart Vite. Open the page once to sync `vite-client-intake`.
-6. Review and publish the staged form in Fillo.
-7. Submit one safe test response with a small file, then confirm the answers and
-   provider file reference in the response workspace.
+2. Connect Google Drive, Box, Amazon S3 or an S3-compatible bucket such as
+   Cloudflare R2.
+3. Copy `.env.example` to `.env.local`.
+4. Set `VITE_FILLO_KEY` to the workspace's public `pk_` key.
+5. Add `http://localhost:5173` to the workspace's allowed origins.
+6. Restart Vite and open the page. This syncs `vite-client-intake`.
+7. Review and publish the form in Fillo.
+8. Submit one test response with a small file.
+9. Find the response and file reference in Fillo.
 
-Eligible new workspaces may have a capped seven-day transit lane for evaluation.
-Connect customer-owned storage before treating this as a durable client document flow.
+Some eligible new workspaces can use temporary Fillo storage while testing. It
+accepts files up to 10 MiB, with 100 MiB available per workspace. Completed
+files expire after seven days. Connect your own storage before you collect
+client files.
 
-## Hand it to a coding agent
+## Change the example
 
-This repository includes [AGENTS.md](AGENTS.md) with the source map, stable IDs,
-upload boundaries, and acceptance checks.
+You can change the labels, help text, colours and layout. Keep these IDs after
+you collect the first response:
 
-For full Fillo instructions, connect your existing workspace and install the
-project skill from the repository root:
+- form: `vite-client-intake`;
+- fields: `name`, `email`, `outcome`, `target-date`, `documents`.
+
+Fillo uses the field IDs as stored answer keys. Keep field conditions in the
+schema. Before you add or change a file field, check `canPublishFileFields`.
+
+Do not add another upload API. Let Fillo create the upload session and let the
+browser send the file to the storage provider. Use a signed webhook if your
+backend must act on each response.
+
+## Use a coding agent
+
+[AGENTS.md](AGENTS.md) lists the files, IDs and checks for this repository.
+
+Connect an existing Fillo workspace and install the Fillo skill:
 
 ```bash
 npx @usefillo/cli@latest login
 npx @usefillo/cli@latest skill install
 ```
 
-No workspace yet? Replace the login command with:
+If you do not have a workspace, run:
 
 ```bash
 npx @usefillo/cli@latest agent bootstrap --email you@company.com
 ```
 
-Then give the agent the actual job:
+Then give the agent a specific task:
 
-> Use the build-with-fillo skill. Adapt this intake flow to our client portal.
-> Keep the existing host design, preserve the stable intake field IDs, verify
-> storage readiness before changing the upload field, run the production build,
-> inspect desktop and mobile states, and tell me the exact publish and real-response
-> checks that remain.
+> Use the build-with-fillo skill. Adapt this form for our client portal. Keep
+> the current page design and the existing form and field IDs. Check storage
+> before you change the file field. Run the production build. Check the page on
+> desktop and mobile. List the steps I must complete in Fillo.
 
-The skill works with Codex, Cursor, GitHub Copilot, Gemini CLI, Claude Code, and
-other compatible agents. See [Fillo's agent setup](https://fillo.so/agents) for
-installation paths and MCP options.
+The skill supports Codex, Cursor, GitHub Copilot, Gemini CLI, Claude Code and
+other compatible agents. [Read the agent setup guide](https://fillo.so/agents).
 
-## Repository map
+## Check before production
 
-| Path | Responsibility |
-| --- | --- |
-| `src/IntakeForm.tsx` | Typed schema, upload field, preview fallback, and Fillo embed |
-| `src/main.tsx` | Client-facing layout and surrounding workflow copy |
-| `src/styles.css` | Host-product styling and responsive layout |
-| `index.html` | Document metadata and Vite entry point |
-| `AGENTS.md` | Instructions and acceptance checks for coding agents |
-| `.github/workflows/ci.yml` | Clean-install and production-build check for every pull request |
-| `.github/workflows/pages.yml` | No-key preview deployment to GitHub Pages |
-
-## Customize without breaking old responses
-
-- Change labels, helper copy, colors, and layout freely.
-- Preserve `vite-client-intake`, `name`, `email`, `outcome`, `target-date`, and
-  `documents` after collecting real responses.
-- Keep field visibility in the schema instead of changing its shape per visitor.
-- Check `canPublishFileFields` before adding or materially changing file fields.
-- Do not upload bytes to a second app endpoint; let the renderer use Fillo's
-  scoped browser-direct upload lifecycle.
-- Use a signed webhook when another backend must react durably to accepted intake.
-
-## Production check
+Run:
 
 ```bash
 npm run build
 ```
 
-Then test required-field errors, a rejected file type, an interrupted upload,
-desktop and mobile layouts, keyboard focus, and the final accepted response.
-Rendering a dropzone alone does not prove that durable storage is ready.
+Then complete these checks:
 
-## Learn the boundaries
+1. Leave each required field empty and check the error.
+2. Select a file type that the form does not accept.
+3. Interrupt an upload and try it again.
+4. Use the form with a keyboard and on a phone.
+5. Submit a response and find its file in Fillo.
 
-- [Client intake implementation guide](https://fillo.so/guides/client-intake-form-with-file-uploads)
+## More help
+
+- [Client intake setup guide](https://fillo.so/guides/client-intake-form-with-file-uploads)
 - [File upload setup](https://fillo.so/docs/uploads)
 - [Client intake template](https://fillo.so/templates/client-intake-form)
-- [Native form request lifecycle](https://fillo.so/guides/native-form-request-lifecycle)
+- [How Fillo handles a form request](https://fillo.so/guides/native-form-request-lifecycle)

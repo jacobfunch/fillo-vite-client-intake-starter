@@ -6,13 +6,49 @@ import { IntakeForm } from "./IntakeForm";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <main>
-      <div className="intro">
-        <p className="eyebrow">New client</p>
-        <h1>Prepare the first working session.</h1>
-        <p>Collect the outcome, timing, and reference files in one response.</p>
+    <main className="app-shell">
+      <header className="site-header">
+        <a className="brand" href="/" aria-label="Fieldwork Studio home">
+          <span aria-hidden="true">F</span>
+          Fieldwork Studio
+        </a>
+        <p>
+          Clients <span>/</span> <strong>New project</strong>
+        </p>
+      </header>
+
+      <div className="intake-layout">
+        <section className="intro" aria-labelledby="intake-title">
+          <p className="eyebrow">Before we meet</p>
+          <h1 id="intake-title">Prepare the first working session.</h1>
+          <p className="intro-copy">
+            Share the outcome, timing, and useful reference files. We&rsquo;ll read everything before
+            the call.
+          </p>
+
+          <div className="next-steps" aria-labelledby="next-steps-title">
+            <p id="next-steps-title">What happens next</p>
+            <ol>
+              <li>
+                <span>1</span>
+                We review the brief and files.
+              </li>
+              <li>
+                <span>2</span>
+                You receive a focused agenda.
+              </li>
+              <li>
+                <span>3</span>
+                We use the call for decisions, not admin.
+              </li>
+            </ol>
+          </div>
+        </section>
+
+        <IntakeForm />
       </div>
-      <IntakeForm />
+
+      <footer>Native intake form · Responses and files stay together in Fillo</footer>
     </main>
   </StrictMode>,
 );

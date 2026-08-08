@@ -34,18 +34,35 @@ const publishableKey = import.meta.env.VITE_FILLO_KEY;
 const fillo = publishableKey ? createClient({ key: publishableKey }) : null;
 
 export function IntakeForm() {
-  if (!fillo) {
-    return (
-      <aside className="setup" role="status">
-        Copy <code>.env.example</code> to <code>.env.local</code> and add your Fillo publishable
-        key.
-      </aside>
-    );
-  }
-
   return (
     <section className="form-card" aria-label="Client intake">
-      <FilloForm form={intake} client={fillo} />
+      <div className="form-heading">
+        <div>
+          <p className="form-kicker">Project brief</p>
+          <h2>Tell us what the work needs.</h2>
+        </div>
+        <span>About 4 minutes</span>
+      </div>
+
+      {!fillo ? (
+        <aside className="setup" role="status">
+          <strong>Preview mode</strong>
+          <span>
+            Add <code>VITE_FILLO_KEY</code> to sync this form, enable uploads, and collect a
+            response.
+          </span>
+        </aside>
+      ) : null}
+
+      {fillo ? (
+        <FilloForm form={intake} client={fillo} showTitle={false} />
+      ) : (
+        <FilloForm form={intake} renderOnly showTitle={false} />
+      )}
+
+      <p className="form-footnote">
+        Your answers and file references arrive together in one response.
+      </p>
     </section>
   );
 }

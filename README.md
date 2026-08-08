@@ -4,7 +4,8 @@
 
 Use this starter to collect a client's contact details, project brief and files
 in one response. `@usefillo/react` renders the form in the page. The browser
-sends files straight to the storage connected to Fillo.
+sends files straight to the storage connected to Fillo. The public demo accepts
+one PDF or image up to 1 MB and requires Fillo's human check.
 
 [Open the demo](https://jacobfunch.github.io/fillo-vite-client-intake-starter/) ·
 [Read the setup guide](https://fillo.so/guides/client-intake-form-with-file-uploads) ·
@@ -52,10 +53,30 @@ answers or change a form in Fillo.
 8. Submit one test response with a small file.
 9. Find the response and file reference in Fillo.
 
+The 1 MB limit is deliberately conservative for the public demo. Raise
+`maxFileSizeMb` only after you connect storage that is suitable for your own
+files and retention policy.
+
 Some eligible new workspaces can use temporary Fillo storage while testing. It
 accepts files up to 10 MiB, with 100 MiB available per workspace. Completed
 files expire after seven days. Connect your own storage before you collect
 client files.
+
+## Deploy the connected demo
+
+The GitHub Pages workflow reads `VITE_FILLO_KEY` from a repository Actions
+variable. Use a dedicated demo workspace and storage destination for a public
+deployment.
+
+1. Add `https://jacobfunch.github.io` to the workspace's allowed origins.
+2. Select the storage destination for `vite-client-intake` and publish the
+   form.
+3. Add the workspace's public `pk_` key as the repository variable
+   `VITE_FILLO_KEY`.
+4. Run the **Deploy demo to GitHub Pages** workflow.
+
+The publishable key is designed for browser code. Do not put a CLI token,
+workspace API key, storage credential or webhook secret in the workflow.
 
 ## Change the example
 

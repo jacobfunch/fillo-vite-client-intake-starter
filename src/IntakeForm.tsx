@@ -32,6 +32,7 @@ const intake = defineForm({
 
 const publishableKey = import.meta.env.VITE_FILLO_KEY;
 const fillo = publishableKey ? createClient({ key: publishableKey }) : null;
+const formTheme = { colorScheme: "light" as const };
 
 export function IntakeForm() {
   return (
@@ -39,28 +40,31 @@ export function IntakeForm() {
       <div className="form-heading">
         <div>
           <p className="form-kicker">Project details</p>
-          <h2>What do you need?</h2>
+          <h1>What do you need?</h1>
         </div>
-        <span>Takes about 4 minutes</span>
+        <span>
+          <i aria-hidden="true" />
+          About 4 minutes
+        </span>
       </div>
 
       {!fillo ? (
         <aside className="setup" role="status">
           <strong>Preview mode</strong>
           <span>
-            Add <code>VITE_FILLO_KEY</code> to connect this form to Fillo. You can then upload files
-            and collect responses.
+            Add <code>VITE_FILLO_KEY</code> to collect responses and enable uploads.
           </span>
         </aside>
       ) : null}
 
       {fillo ? (
-        <FilloForm form={intake} client={fillo} showTitle={false} />
+        <FilloForm form={intake} client={fillo} showTitle={false} theme={formTheme} />
       ) : (
         <FilloForm
           form={intake}
           renderOnly
           showTitle={false}
+          theme={formTheme}
           renderSuccess={() => (
             <div className="preview-success">
               <span aria-hidden="true">✓</span>
@@ -72,12 +76,6 @@ export function IntakeForm() {
           )}
         />
       )}
-
-      <p className="form-footnote">
-        {fillo
-          ? "Your answers and file references appear together in Fillo."
-          : "Preview only. We do not send or save what you enter."}
-      </p>
     </section>
   );
 }

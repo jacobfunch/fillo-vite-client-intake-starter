@@ -70,8 +70,42 @@ a:focus-visible {
   font-size: 0.75rem;
 }
 
+.page-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.page-meta code {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border: 1px solid #e3e0d9;
+  border-radius: 999px;
+  background: #f8f7f4;
+  padding: 0.38rem 0.6rem;
+  color: #55524b;
+  font-size: 0.67rem;
+}
+
+.page-meta code span {
+  width: 0.38rem;
+  height: 0.38rem;
+  border-radius: 50%;
+  background: #7c63ea;
+  box-shadow: 0 0 0 0.2rem rgb(124 99 234 / 12%);
+}
+
+.page-meta p {
+  margin: 0;
+  color: #77736e;
+  font-size: 0.75rem;
+}
+
 .intake-layout {
   position: relative;
+  z-index: 0;
+  isolation: isolate;
   display: grid;
   place-items: start center;
   padding: clamp(4rem, 9vw, 7rem) 0 4rem;
@@ -79,23 +113,31 @@ a:focus-visible {
 
 .intake-layout::before {
   position: absolute;
-  z-index: -1;
+  z-index: 0;
   top: clamp(2rem, 6vw, 4rem);
   width: min(90%, 60rem);
   height: 18rem;
   border-radius: 50%;
-  background: radial-gradient(
-    circle,
-    rgb(153 128 255 / 34%) 0%,
-    rgb(205 190 255 / 18%) 42%,
-    transparent 72%
-  );
-  filter: blur(2rem);
+  background:
+    radial-gradient(circle at 28% 48%, rgb(124 99 234 / 30%), transparent 48%),
+    radial-gradient(circle at 74% 46%, rgb(244 232 216 / 92%), transparent 52%);
+  filter: blur(2.5rem);
   content: "";
+  opacity: 0.72;
   pointer-events: none;
+  transition:
+    opacity 300ms ease,
+    transform 500ms ease;
+}
+
+.intake-layout:has(.fillo-form:focus-within)::before {
+  opacity: 0.95;
+  transform: translateY(0.75rem) scale(1.04);
 }
 
 .form-card {
+  position: relative;
+  z-index: 1;
   width: min(100%, 54rem);
   min-width: 0;
 }
@@ -217,6 +259,10 @@ h1 {
   box-shadow: 0 0 0 3px rgb(124 99 234 / 16%);
 }
 
+.form-card .fillo-field:has(.fillo-input:focus-visible) .fillo-label {
+  color: #5d46c7;
+}
+
 .form-card .fillo-dropzone {
   min-height: 5.25rem;
   justify-content: center;
@@ -227,6 +273,20 @@ h1 {
   min-height: 2.85rem;
   border-radius: 999px;
   padding-inline: 1.35rem;
+  box-shadow: 0 0.65rem 1.4rem -0.8rem rgb(38 37 30 / 58%);
+  transition:
+    box-shadow 160ms ease,
+    transform 160ms ease;
+}
+
+.form-card .fillo-button:hover:not(:disabled) {
+  box-shadow: 0 0.85rem 1.6rem -0.8rem rgb(38 37 30 / 70%);
+  transform: translateY(-1px);
+}
+
+.form-card .fillo-button:active:not(:disabled) {
+  box-shadow: none;
+  transform: translateY(0);
 }
 
 .preview-success {
@@ -277,6 +337,10 @@ h1 {
 
   .site-header {
     min-height: 4rem;
+  }
+
+  .page-meta p {
+    display: none;
   }
 
   .intake-layout {

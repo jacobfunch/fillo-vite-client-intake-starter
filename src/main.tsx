@@ -17,7 +17,13 @@ createRoot(root).render(
           </span>
           <span>Fieldwork Studio</span>
         </a>
-        <p>New project</p>
+        <div className="page-meta">
+          <code>
+            <span aria-hidden="true" />
+            @usefillo/react
+          </code>
+          <p>New project</p>
+        </div>
       </header>
 
       <div className="intake-layout">

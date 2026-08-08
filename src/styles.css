@@ -74,15 +74,15 @@ a:focus-visible {
   position: relative;
   display: grid;
   place-items: start center;
-  padding: clamp(4rem, 9vw, 7.5rem) 0 4rem;
+  padding: clamp(4rem, 9vw, 7rem) 0 4rem;
 }
 
 .intake-layout::before {
   position: absolute;
   z-index: -1;
-  top: clamp(2.5rem, 7vw, 5rem);
-  width: min(90%, 56rem);
-  height: 20rem;
+  top: clamp(2rem, 6vw, 4rem);
+  width: min(90%, 60rem);
+  height: 18rem;
   border-radius: 50%;
   background: radial-gradient(
     circle,
@@ -96,15 +96,8 @@ a:focus-visible {
 }
 
 .form-card {
-  width: min(100%, 48rem);
+  width: min(100%, 54rem);
   min-width: 0;
-  border: 1px solid #dedbd4;
-  border-radius: 1.15rem;
-  background: #fffefd;
-  padding: clamp(1.5rem, 4vw, 3rem);
-  box-shadow:
-    0 0 0 0.5px rgb(38 37 30 / 5%),
-    0 2rem 5rem -2.4rem rgb(38 32 18 / 28%);
 }
 
 .form-heading {
@@ -186,7 +179,15 @@ h1 {
 }
 
 .form-card .fillo-blocks {
-  gap: 1.35rem;
+  /* The SDK renders native field wrappers, so this host page can place them on
+     its own grid instead of accepting an iframe-owned layout. */
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.35rem 1rem;
+}
+
+.form-card .fillo-blocks > :nth-child(n + 3) {
+  grid-column: 1 / -1;
 }
 
 .form-card .fillo-field {
@@ -259,6 +260,16 @@ h1 {
   line-height: 1.5;
 }
 
+@media (max-width: 44rem) {
+  .form-card .fillo-blocks {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .form-card .fillo-blocks > * {
+    grid-column: 1;
+  }
+}
+
 @media (max-width: 38rem) {
   .app-shell {
     width: min(calc(100% - 1.5rem), 70rem);
@@ -270,11 +281,6 @@ h1 {
 
   .intake-layout {
     padding-top: 2.5rem;
-  }
-
-  .form-card {
-    border-radius: 0.9rem;
-    padding: 1.35rem;
   }
 
   .form-heading {

@@ -4,7 +4,10 @@ import "@usefillo/react/styles.css";
 import "./styles.css";
 import { IntakeForm } from "./IntakeForm";
 
-createRoot(document.getElementById("root")!).render(
+const root = document.getElementById("root");
+if (!root) throw new Error("Missing #root mount element.");
+
+createRoot(root).render(
   <StrictMode>
     <main className="app-shell">
       <header className="site-header">
@@ -19,36 +22,35 @@ createRoot(document.getElementById("root")!).render(
 
       <div className="intake-layout">
         <section className="intro" aria-labelledby="intake-title">
-          <p className="eyebrow">Before we meet</p>
-          <h1 id="intake-title">Prepare the first working session.</h1>
+          <p className="eyebrow">New project</p>
+          <h1 id="intake-title">Tell us about your project.</h1>
           <p className="intro-copy">
-            Share the outcome, timing, and useful reference files. We&rsquo;ll read everything before
-            the call.
+            Tell us what you need, when you need it and which files will help us prepare.
           </p>
 
-          <div className="next-steps" aria-labelledby="next-steps-title">
+          <section className="next-steps" aria-labelledby="next-steps-title">
             <p id="next-steps-title">What happens next</p>
             <ol>
               <li>
                 <span>1</span>
-                We review the brief and files.
+                We read your brief and files.
               </li>
               <li>
                 <span>2</span>
-                You receive a focused agenda.
+                We send you a plan for the call.
               </li>
               <li>
                 <span>3</span>
-                We use the call for decisions, not admin.
+                We use the call to make decisions.
               </li>
             </ol>
-          </div>
+          </section>
         </section>
 
         <IntakeForm />
       </div>
 
-      <footer>Native intake form · Responses and files stay together in Fillo</footer>
+      <footer>Built with Fillo · Answers and file references appear in one response</footer>
     </main>
   </StrictMode>,
 );

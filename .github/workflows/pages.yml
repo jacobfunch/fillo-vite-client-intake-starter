@@ -32,6 +32,8 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Build demo
+        env:
+          VITE_FILLO_KEY: ${{ vars.VITE_FILLO_KEY }}
         run: npm run build
       - name: Configure Pages
         uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5

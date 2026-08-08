@@ -20,14 +20,19 @@ const intake = defineForm({
         {
           id: "documents",
           kind: "file_upload",
-          label: "Briefs or reference files (PDF, DOCX, PNG or JPG)",
-          accept: [".pdf", ".doc", ".docx", ".png", ".jpg", ".jpeg"],
-          maxFiles: 5,
+          label: "Brief or reference file (PDF, PNG or JPG)",
+          description: "Demo only. Do not upload private or sensitive files.",
+          accept: [".pdf", ".png", ".jpg", ".jpeg"],
+          maxFiles: 1,
+          maxFileSizeMb: 1,
         },
       ],
     },
   ],
-  settings: { submitLabel: "Send project details" },
+  settings: {
+    submitLabel: "Send project details",
+    trust: { challenge: "turnstile" },
+  },
 });
 
 const publishableKey = import.meta.env.VITE_FILLO_KEY;

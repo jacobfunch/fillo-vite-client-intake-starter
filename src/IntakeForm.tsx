@@ -57,11 +57,24 @@ export function IntakeForm() {
       {fillo ? (
         <FilloForm form={intake} client={fillo} showTitle={false} />
       ) : (
-        <FilloForm form={intake} renderOnly showTitle={false} />
+        <FilloForm
+          form={intake}
+          renderOnly
+          showTitle={false}
+          renderSuccess={() => (
+            <div className="preview-success">
+              <span aria-hidden="true">✓</span>
+              <h3>Preview complete.</h3>
+              <p>Nothing was sent or saved. Add a publishable key to collect a real response.</p>
+            </div>
+          )}
+        />
       )}
 
       <p className="form-footnote">
-        Your answers and file references arrive together in one response.
+        {fillo
+          ? "Your answers and file references arrive together in one response."
+          : "Preview only. Anything you enter stays in this browser tab."}
       </p>
     </section>
   );

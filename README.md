@@ -7,6 +7,7 @@ reference files in one response. The UI renders natively with `@usefillo/react`;
 files go browser-direct to the workspace's configured storage.
 
 [Read the implementation guide](https://fillo.so/guides/client-intake-form-with-file-uploads) ·
+[Open the no-signup demo](https://jacobfunch.github.io/fillo-vite-client-intake-starter/) ·
 [React SDK](https://www.npmjs.com/package/@usefillo/react) ·
 [Fillo upload docs](https://fillo.so/docs/uploads)
 
@@ -37,12 +38,13 @@ npm run dev
 ```
 
 Open [http://localhost:5173](http://localhost:5173). No Fillo account is required
-for the local UI preview. The page labels itself **Preview mode**, disables
-submission and uploads, and makes no remote form changes.
+for the local UI preview. The page labels itself **Preview mode**, keeps the
+fields and local success interaction inspectable, disables uploads, and never
+sends a response or makes remote form changes.
 
 ## Collect the first real intake
 
-1. Create or open a workspace at [fillo.so](https://fillo.so).
+1. [Create or open a Fillo workspace](https://fillo.so/start?from=github-vite-client-intake).
 2. Connect durable storage: Google Drive, Box, Amazon S3, or an S3-compatible
    bucket such as Cloudflare R2.
 3. Copy `.env.example` to `.env.local` and set `VITE_FILLO_KEY` to the public
@@ -97,6 +99,7 @@ installation paths and MCP options.
 | `index.html` | Document metadata and Vite entry point |
 | `AGENTS.md` | Instructions and acceptance checks for coding agents |
 | `.github/workflows/ci.yml` | Clean-install and production-build check for every pull request |
+| `.github/workflows/pages.yml` | No-key preview deployment to GitHub Pages |
 
 ## Customize without breaking old responses
 

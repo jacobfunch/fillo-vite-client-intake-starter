@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@usefillo/react": "^0.16.1",
+    "@usefillo/react": "^0.17.0",
     "react": "^19.2.8",
     "react-dom": "^19.2.8"
   },

@@ -37,7 +37,7 @@ const intake = defineForm({
 
 const publishableKey = import.meta.env.VITE_FILLO_KEY;
 const fillo = publishableKey ? createClient({ key: publishableKey }) : null;
-const formTheme = { colorScheme: "light" as const };
+const formTheme = { colorScheme: "auto" as const };
 
 export function IntakeForm() {
   return (

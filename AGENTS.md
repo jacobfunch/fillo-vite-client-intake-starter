@@ -52,6 +52,8 @@ answer keys. You can change labels and help text.
 - Put field conditions in the form schema. Do not change the schema for each
   visitor.
 - Keep labels, errors, focus, disabled states and keyboard controls accessible.
+- Keep the page and `FilloForm` on automatic colour schemes. Define complete
+  light and dark tokens instead of forcing one scheme to hide a mismatch.
 - Do not add analytics, a state library or unrelated portal features.
 
 ## Checks
@@ -60,6 +62,7 @@ answer keys. You can change labels and help text.
 - Preview mode shows the fields and a disabled file field.
 - Preview mode does not send a response.
 - The desktop and mobile pages do not overflow.
+- Light and dark system settings render matching page and form controls.
 - With a key, Fillo stages or loads the form according to the workspace sync
   setting.
 - Connect your own storage before a production upload test.

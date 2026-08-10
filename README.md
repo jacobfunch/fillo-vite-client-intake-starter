@@ -36,6 +36,7 @@ answers or change a form in Fillo.
 
 - A form schema in `src/IntakeForm.tsx`.
 - React form controls that you can style with normal CSS. There is no iframe.
+- A light and dark theme that follows the visitor's system setting.
 - A file field that sends files straight from the browser to connected storage.
 - A local preview that works before you add a key.
 - Build checks for pull requests and a GitHub Pages preview.

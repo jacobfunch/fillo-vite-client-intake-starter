@@ -8,7 +8,7 @@ sends files straight to the storage connected to Fillo. The public demo accepts
 one PDF or image up to 1 MB and requires Fillo's human check.
 
 [Open the demo](https://jacobfunch.github.io/fillo-vite-client-intake-starter/) ·
-[Read the setup guide](https://fillo.so/guides/client-intake-form-with-file-uploads) ·
+[Read the setup guide](https://fillo.so/guides/client-intake-form-with-file-uploads?utm_source=github&utm_medium=referral&utm_campaign=vite-intake-starter) ·
 [React SDK](https://www.npmjs.com/package/@usefillo/react) ·
 [File upload docs](https://fillo.so/docs/uploads)
 
@@ -43,12 +43,12 @@ answers or change a form in Fillo.
 
 ## Connect the form to Fillo
 
-1. [Create or open a Fillo workspace](https://fillo.so/start?from=github-vite-client-intake).
+1. [Create or open a Fillo workspace](https://fillo.so/start?from=github-vite-client-intake&utm_source=github&utm_medium=referral&utm_campaign=vite-intake-starter).
 2. Connect Google Drive, Box, Amazon S3 or an S3-compatible bucket such as
    Cloudflare R2.
 3. Copy `.env.example` to `.env.local`.
-4. Set `VITE_FILLO_KEY` to the workspace's public `pk_` key.
-5. Add `http://localhost:5173` to the workspace's allowed origins.
+4. Set `VITE_FILLO_KEY` to the project's public `pk_` key.
+5. Add `http://localhost:5173` to the project's allowed origins.
 6. Restart Vite and open the page. This syncs `vite-client-intake`.
 7. Review and publish the form in Fillo.
 8. Submit one test response with a small file.
@@ -69,15 +69,15 @@ The GitHub Pages workflow reads `VITE_FILLO_KEY` from a repository Actions
 variable. Use a dedicated demo workspace and storage destination for a public
 deployment.
 
-1. Add `https://jacobfunch.github.io` to the workspace's allowed origins.
+1. Add `https://jacobfunch.github.io` to the project's allowed origins.
 2. Select the storage destination for `vite-client-intake` and publish the
    form.
-3. Add the workspace's public `pk_` key as the repository variable
+3. Add the project's public `pk_` key as the repository variable
    `VITE_FILLO_KEY`.
 4. Run the **Deploy demo to GitHub Pages** workflow.
 
 The publishable key is designed for browser code. Do not put a CLI token,
-workspace API key, storage credential or webhook secret in the workflow.
+project API key, storage credential or webhook secret in the workflow.
 
 ## Change the example
 
@@ -105,10 +105,10 @@ npx @usefillo/cli@latest login
 npx @usefillo/cli@latest skill install
 ```
 
-If you do not have a workspace, run:
+If you do not have a workspace, ask the owner for their work email, then run:
 
 ```bash
-npx @usefillo/cli@latest agent bootstrap --email you@company.com
+npx @usefillo/cli@latest agent bootstrap --email <their email>
 ```
 
 Then give the agent a specific task:
@@ -139,7 +139,13 @@ Then complete these checks:
 
 ## More help
 
-- [Client intake setup guide](https://fillo.so/guides/client-intake-form-with-file-uploads)
+- [Client intake setup guide](https://fillo.so/guides/client-intake-form-with-file-uploads?utm_source=github&utm_medium=referral&utm_campaign=vite-intake-starter)
 - [File upload setup](https://fillo.so/docs/uploads)
 - [Client intake template](https://fillo.so/templates/client-intake-form)
 - [How Fillo handles a form request](https://fillo.so/guides/native-form-request-lifecycle)
+
+## Continue the workflow
+
+- [Verify the first saved response](https://fillo.so/guides/agent-form-to-first-response).
+- [Use shadcn controls](https://fillo.so/guides/shadcn-feedback-form).
+- [Send feedback to Notion](https://fillo.so/guides/notion-product-feedback) or [route intake through n8n](https://fillo.so/guides/n8n-client-intake).
